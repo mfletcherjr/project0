@@ -82,7 +82,7 @@ export default interface ClientDAO{
 
     async getClientById(clientID: string): Promise<Client> {
      
-        //Adam's method edited, still not operational
+        
         const client = await bucket.item(clientID,clientID).read<Client>();
             
         // if the response.resource is undefined it means you did not fetch anything
