@@ -59,10 +59,10 @@ app.get('/clients/:id', async (req,res)=>{
     } catch (error){
         if (error instanceof NotFoundError) {
             res.status(404);
-            res.send('The provided ID could not locate client');
+            res.send('The provided ID could not locate client.');
         } else {
             res.status(500);
-            res.send("Something very wrong here"); 
+            res.send("Something very wrong here!!!!!"); 
         }
         
     }
@@ -70,9 +70,22 @@ app.get('/clients/:id', async (req,res)=>{
 
 
 app.delete('/clients/:id', async (req, res)=>{
+   try {
     const {id} = req.params;
-    const deletedClient: Client = await clientDAO.deleteClientById(id)
-    res.send("Deleted the client succesfully id: " + deletedClient.id);
+    const deletedClient: Boolean = await clientDAO.deleteClientById(id)
+    res.status(200);
+    res.send("Deleted the client");
+    res.send(id);
+   } catch (error) {
+       if (error instanceof NotFoundError) {
+           res.status(404);
+           res.send("The provided ID could not locate client for removal.");
+       } else {
+        res.status(500);
+        res.send("Something very wrong here!!!!!"); 
+       }   
+
+   }
 });
 
 
