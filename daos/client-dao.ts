@@ -40,7 +40,7 @@ export default interface ClientDAO{
     //updateClient(client:Client):Promise<Client>;
 
    //DELETE remove client used for DELETE
-    deleteClientById(id:string):Promise<Client>;
+    deleteClientById(id:string):Promise<Boolean>;
 
     //PATCH used to deposit or withdraw funds from client account
     // patchBalance(balance:number):Promise<Account["balance"]>;
@@ -95,12 +95,12 @@ export default interface ClientDAO{
     }
 
 
-    async deleteClientById(clientID: string): Promise<Client> {
+    async deleteClientById(clientID: string): Promise<Boolean> {
         //requires getClientById to function correctly is DONE, now to implement
         //here so that it pulls single client for deletion
         const client = await this.getClientById(clientID);
         const response = await bucket.item(clientID,clientID).delete();
-        return client;
+        return true;
 
     }
  }//end of ClientDao
