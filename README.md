@@ -19,4 +19,3 @@ retrieve a speceific client
 
 delete a specific client
 
-retrieve the balance of a client
