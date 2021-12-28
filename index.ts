@@ -83,7 +83,6 @@ app.delete('/clients/:id', async (req, res)=>{
     const deletedClient: Boolean = await clientDAO.deleteClientById(id)
     res.status(200);
     res.send("Deleted the client");
-    res.send(id);
    } catch (error) {
        if (error instanceof NotFoundError) {
            res.status(404);
