@@ -49,7 +49,11 @@ uniqueID + GET VERB
 
 */
 
+ /*
+    returns a particular/given client
+    based on their provided clientID (uuid generated)
 
+    */
 app.get('/clients/:id', async (req,res)=>{
 
     try {
@@ -68,7 +72,11 @@ app.get('/clients/:id', async (req,res)=>{
     }
 });  
 
+ /*
+    deletes a particular/given client
+    based on their provided clientID (uuid generated)
 
+    */
 app.delete('/clients/:id', async (req, res)=>{
    try {
     const {id} = req.params;
