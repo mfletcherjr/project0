@@ -75,8 +75,8 @@ export default interface ClientDAO{
     }
 
     /*
-    returns a particular/given 
-
+    returns a particular/given client
+    based on their provided clientID (uuid generated)
 
     */
 
@@ -94,7 +94,11 @@ export default interface ClientDAO{
         return {id, fname, lname, accounts};
     }
 
+ /*
+    deletes a particular/given client
+    based on their provided clientID (uuid generated)
 
+    */
     async deleteClientById(clientID: string): Promise<Boolean> {
         //requires getClientById to function correctly is DONE, now to implement
         //here so that it pulls single client for deletion
