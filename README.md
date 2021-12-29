@@ -19,3 +19,5 @@ retrieve a speceific client
 
 delete a specific client
 
+update first name or last name or both in a client found by id
+
