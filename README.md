@@ -1,6 +1,8 @@
 # project0
 first project in Revature Training
 
+Norwegian International Corporate Expertise Banking
+
 this is my first use of github at all
 this is also my first project as a revature junior software engineer trainee
 my objective is to create a very simple banking application that has very basic functionality
