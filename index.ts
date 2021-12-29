@@ -99,7 +99,7 @@ app.put('/clients/:id',async (req,res) => {
         client.id = id;
         const editedClient: Client = await clientDAO.updateClient(client);
         res.send(editedClient);
-       // res.send("Update successfully applied to id " +client.id)
+       
     } catch (error) {
         if (error instanceof NotFoundError) {
             res.status(404);
