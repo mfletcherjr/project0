@@ -97,6 +97,7 @@ app.put('/clients/:id',async (req,res) => {
         const client: Client = req.body;
         const {id} = req.params;
         client.id = id;
+        await clientDAO.getClientById(id);
         const editedClient: Client = await clientDAO.updateClient(client);
         res.send(editedClient);
        
