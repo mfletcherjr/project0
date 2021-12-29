@@ -37,7 +37,7 @@ export default interface ClientDAO{
     // getAccountType(accountType:string):Promise<Account["accountType"]>; //returns the type of account the client has
 
     //UPDATE client information will be used for PUT
-    //updateClient(client:Client):Promise<Client>;
+    updateClient(client: Client):Promise<Client>;
 
    //DELETE remove client used for DELETE
     deleteClientById(id:string):Promise<Boolean>;
@@ -78,6 +78,8 @@ export default interface ClientDAO{
     returns a particular/given client
     based on their provided clientID (uuid generated)
 
+    retrieve specified client based on their generated id
+
     */
 
     async getClientById(clientID: string): Promise<Client> {
@@ -94,19 +96,42 @@ export default interface ClientDAO{
         return {id, fname, lname, accounts};
     }
 
- /*
+    /*
     deletes a particular/given client
     based on their provided clientID (uuid generated)
+
+    get client using getClientById to retrieve specified client
+    delete client operation
+    push deletion to cosmos DB
 
     */
     async deleteClientById(clientID: string): Promise<Boolean> {
         //requires getClientById to function correctly is DONE, now to implement
         //here so that it pulls single client for deletion
-        const client = await this.getClientById(clientID);
-        const response = await bucket.item(clientID,clientID).delete();
+        await this.getClientById(clientID);
+        await bucket.item(clientID,clientID).delete();
         return true;
 
     }
+
+    /*
+    updates client information fname or lname
+    utilizes PUT to perform operation in the index.ts
+
+    get client for edit 
+    deconstruct client object and pull fname and lname attributes
+    edit attributes
+    apply change
+    send to cosmos DB
+    */
+    async updateClient(client: Client):Promise<Client>{
+       
+        const response = await bucket.items.upsert<Client>(client);
+        
+        return response.resource;
+    }
+
+
  }//end of ClientDao
 
     
