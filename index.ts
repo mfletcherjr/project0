@@ -11,10 +11,7 @@ app.use(express.json());
 
 //this where the MAGIC happens
 
-/*
-D'VON, GET THE TABLES
 
-*/
 
 /*
 add client to the cosmos DB via postman using
@@ -95,5 +92,23 @@ app.delete('/clients/:id', async (req, res)=>{
    }
 });
 
+app.put('/clients/:id',async (req,res) => {
+    try {
+        const client: Client = req.body;
+        const {id} = req.params;
+        client.id = id;
+        const editedClient: Client = await clientDAO.updateClient(client);
+        res.send(editedClient);
+       // res.send("Update successfully applied to id " +client.id)
+    } catch (error) {
+        if (error instanceof NotFoundError) {
+            res.status(404);
+            res.send("The provided ID could not locate client for update.");
+        } else {
+         res.status(500);
+         res.send("Something very wrong here!!!!!"); 
+        }   
+    }
+})
 
 app.listen(3000,()=> console.log("Application launched"));//End of File
