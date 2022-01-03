@@ -1,5 +1,5 @@
 # project0
-first project in Revature Training
+First project in Revature Training
 
 Norwegian International Corporate Expertise Banking Systems
 
